@@ -12,6 +12,7 @@ class datadog_agent::system_probe (
   Optional[String] $sysprobe_socket       = undef,
   Boolean $enable_oom_kill                = false,
   Optional[Hash] $runtime_security_config = undef,
+  Boolean $gpu_monitoring_enabled = false,
 
   Boolean $service_enable = true,
   String $service_ensure = 'running',
@@ -31,6 +32,9 @@ class datadog_agent::system_probe (
       'enabled' => $service_monitoring_enabled,
     },
     'runtime_security_config' => $runtime_security_config,
+    'gpu_monitoring' => {
+      'enabled' => $gpu_monitoring_enabled,
+    },
   }
 
   if $facts['os']['name'] == 'Windows' {
